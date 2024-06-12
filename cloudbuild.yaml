@@ -1,0 +1,11 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/fourth-eon-426109-k5/fuzzy-clustering-subtractive', '.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/fourth-eon-426109-k5/fuzzy-clustering-subtractive']
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args: ['run', 'deploy', 'fuzzy-clustering-subtractive', '--image', 'gcr.io/fourth-eon-426109-k5/fuzzy-clustering-subtractive', '--platform', 'managed', '--region', 'us-west1']
+
+images:
+  - 'gcr.io/fourth-eon-426109-k5/fuzzy-clustering-subtractive'
